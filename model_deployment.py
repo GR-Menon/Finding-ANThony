@@ -1,1 +1,43 @@
-{"metadata":{"kernelspec":{"language":"python","display_name":"Python 3","name":"python3"},"language_info":{"name":"python","version":"3.10.12","mimetype":"text/x-python","codemirror_mode":{"name":"ipython","version":3},"pygments_lexer":"ipython3","nbconvert_exporter":"python","file_extension":".py"}},"nbformat_minor":4,"nbformat":4,"cells":[{"cell_type":"code","source":"# %% [code]\nfrom fastai.vision.all import *\nimport gradio as gr\n\n# categories = ('Ant','Termite')\n\n# def classify(model, img):\n#     preds, idx, probs = model.predict(img)\n#     return dict(zip(categories,map(float,probs) ))\n\n# def create_Gradio_interface(model_file='model.pkl', pred_function=classify, img_examples=None):\n#     model = pickle.load(open(model_file,'rb'))\n    \n#     image = gr.inputs.Image(shape=(256,256))\n#     label = gr.outputs.Label()\n    \n#     interface = gr.Interface(fn=pred_function, inputs=image, outputs=label, examples=img_examples)\n#     interface.launch(inline=False,share=True)\n\n\nclass Interface:\n    def __init__(self, model, categories, examples):\n        self.model = model\n        self.examples = examples\n        self.categories = categories\n    \n    def classify(self,img):\n        pred, idx, probs = self.model.predict(img)\n        return dict(zip(self.categories, map(float, probs)))\n    \n    def create_interface(self):\n        image = gr.inputs.Image(shape=(256,256))\n        label = gr.outputs.Label()\n        \n        interface = gr.Interface(fn=self.classify, inputs=image, outputs=label, examples=self.examples)\n        interface.launch(inline=False,share=True)\n    \n    \n    \n        ","metadata":{"_uuid":"ced6be5a-21ac-42c3-898a-6489fc25a50e","_cell_guid":"03961cc0-904d-4205-962a-08d1b5c3e5ce","collapsed":false,"jupyter":{"outputs_hidden":false},"trusted":true},"execution_count":4,"outputs":[{"traceback":["\u001b[0;36m  Cell \u001b[0;32mIn[4], line 1\u001b[0;36m\u001b[0m\n\u001b[0;31m    def create_Gradio_interface(model_file='model.pkl', pred_function=None, img_examples=):\u001b[0m\n\u001b[0m                                                                                         ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"],"ename":"SyntaxError","evalue":"invalid syntax (2974389281.py, line 1)","output_type":"error"}]}]}
+from fastai.vision.all import *
+import gradio as gr
+
+
+class Interface:
+    def __init__(self, model, categories, examples):
+        self.model = model
+        self.examples = examples
+        self.categories = categories
+    
+    def classify(self,img):
+        pred, idx, probs = self.model.predict(img)
+        return dict(zip(self.categories, map(float, probs)))
+    
+    def create_interface(self):
+        image = gr.inputs.Image(shape=(256,256))
+        label = gr.outputs.Label()
+        
+        interface = gr.Interface(fn=self.classify, inputs=image, outputs=label, examples=self.examples)
+        interface.launch(inline=False,share=True)
+
+
+# categories = ('Ant','Termite')
+
+# def classify(model, img):
+#     preds, idx, probs = model.predict(img)
+#     return dict(zip(categories,map(float,probs) ))
+
+# def create_Gradio_interface(model_file='model.pkl', pred_function=classify, img_examples=None):
+#     model = pickle.load(open(model_file,'rb'))
+    
+#     image = gr.inputs.Image(shape=(256,256))
+#     label = gr.outputs.Label()
+    
+#     interface = gr.Interface(fn=pred_function, inputs=image, outputs=label, examples=img_examples)
+#     interface.launch(inline=False,share=True)
+
+
+
+    
+    
+    
+        
