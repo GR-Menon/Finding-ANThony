@@ -9,11 +9,11 @@ This is the link to my Kaggle notebook for the same:
 <hr/>
 
 Using the fast.ai library, I have created a binary image classifier involving the following:  
-  1. ResNet18 with pretrained weights  
-  2. SaveModelCallback( )  
-  3. ReduceLROnPlateau( ) Callback  
-  4. Image Augmentations:
-       - Resizing  
+  -   ResNet18 with pretrained weights
+  -   SaveModelCallback( )
+  -   ReduceLROnPlateau( ) Callback
+  -   Image Augmentations:
+       -  Resizing  
        - Rotations  
        - Flipping  
        - Affine transformations  
